@@ -4,7 +4,10 @@ var ElH1 = document.createElement("h1");
 var Elinfo = document.createElement("div");
 var ElButton = document.createElement("button");
 var ElTimer = document.getElementById("timer");
+var ElHighScores = document.getElementById("highscores");
 var Question1 = document.createElement("div");
+var score = document.getElementById("score");
+var initials = document.getElementById("initials");
 var correctCounter = 0;
 var timerCounter = 75;
 var timeLess = nowTime - 15;
@@ -70,7 +73,7 @@ function startButton() {
 
     };
 
-
+    startButton();
 
 function nowTime() {
     setInterval(function() {
@@ -78,3 +81,15 @@ function nowTime() {
     }, 1000);
 };
 
+function storeChoices() {
+    localStorage.setItem("quizTakerChoice", JSON.stringify(quizTakerChoice));
+    localStorage.setItem("initials", JSON.stringify(initials));
+}
+
+function highScores() {
+    score = JSON.parse(localStorage.getItem("quizTakerChoice"));
+    var lastUser = JSON.parse(localStorage.getItem("initials"));
+    }
+
+storeChoices();
+highScores();
