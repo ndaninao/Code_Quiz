@@ -9,4 +9,8 @@
 
 It would be really nice to have someone sit down and review my code and fill in where I am missing so that I can see where I am making errors in thinking. 
 
-Right now, it’s go ‘do’ and good luck. It feels like asking a 1-week old infant to walk…..
+I feel like I am on the right track, but am missing some elements. 
+
+What is the best way to clear an input field? 
+
+

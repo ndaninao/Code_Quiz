@@ -6,8 +6,11 @@ var ElButton = document.createElement("button");
 var ElTimer = document.getElementById("timer");
 var ElHighScores = document.getElementById("highscores");
 var Question1 = document.createElement("div");
-var score = document.getElementById("score");
-var initials = document.getElementById("initials");
+var score = document.querySelector("score");
+var initials = document.querySelector("initials");
+var goBack = document.getElementById("goback");
+var clear = document.getElementById("clear");
+var form = document.getElementById("form");
 var correctCounter = 0;
 var timerCounter = 75;
 var timeLess = nowTime - 15;
@@ -75,6 +78,7 @@ function startButton() {
 
     startButton();
 
+
 function nowTime() {
     setInterval(function() {
         timerCounter--;
@@ -87,9 +91,24 @@ function storeChoices() {
 }
 
 function highScores() {
-    score = JSON.parse(localStorage.getItem("quizTakerChoice"));
-    var lastUser = JSON.parse(localStorage.getItem("initials"));
-    }
+    ElHighScores.addEventListener("click", function() {
+        score = JSON.parse(localStorage.getItem("quizTakerChoice"));
+        var lastUser = JSON.parse(localStorage.getItem("initials"));
+    });
+    
+};
+
+function goBackBttn() {
+    goBack.addEventListener("click", function() {
+        return startButton();
+    });
+};
+
+function clearBttn() {
+    clear.addEventListener("click", function() {
+        form = null;
+    });
+};
 
 storeChoices();
 highScores();
