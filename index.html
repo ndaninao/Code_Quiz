@@ -9,49 +9,67 @@
 </head>
 
 <body>   
-    <header id="timer">
+    <header>
+       <div id="highscores">
         <button id="highscores">High Scores</button>
+    </div>
+    <div id="timer"></div>   
     </header>
-    <script src="script.js"></script> 
-
-    <div id="question1">
-        <ol>
-            <li><button onclick=strings>1. strings</button></li>
-            <li><button onclick=booleans>2. booleans</button></li>
-            <li><button onclick=alerts>3. alerts</button></li>
-            <li><button onclick=numbers>4. numbers</button></li>
+    
+    <div id="question1" style="text-align:center">
+        <ol style="list-style-position: inside"> Commonly used data types DO NOT include: 
+            <li><button class="answerButton1" id="false1">strings</button></li>
+            <li><button class="answerButton1" id="false1">booleans</button></li>
+            <li><button class="answerButton1" id="true1">alerts</button></li>
+            <li><button class="answerButton1" id="false1">numbers</button></li>
         </ol>
     </div>
 
-    <div id="question2">
-        <ol>
-            <li><button onclick=numStrings>1. numbers and strings</button></li>
-            <li><button onclick=otherArrays>2. other arrays</button></li>
-            <li><button onclick=booleans>3. booleans</button></li>
-            <li><button onclick=allAbove>4. all of the above</button></li>
+    <div id="question2" style="text-align:center">
+        <ol style="list-style-position: inside"> Arrays in JavaScript can be used to store:
+            <li><button class="answerButton2" id="true2">numbers and strings</button></li>
+            <li><button class="answerButton2" id="false2">other arrays</button></li>
+            <li><button class="answerButton2" id="false2">booleans</button></li>
+            <li><button class="answerButton2" id="false2">all of the above</button></li>
         </ol>
     </div>
    
-    <div id="question3">
-        <ol>
-            <li><button onclick=commas>1. commas</button></li>
-            <li><button onclick=curlyBrackets>2. curly brackets</button></li>
-            <li><button onclick=quotes>3. quotes</button></li>
-            <li><button onclick=parantheses>4. parantheses</button></li>
+    <div id="question3" style="text-align:center">
+        <ol style="list-style-position: inside"> String values must be enclosed within _____ when being assigned to variables:
+            <li><button class="answerButton3" id="false3">commas</button></li>
+            <li><button class="answerButton3" id="false3">curly brackets</button></li>
+            <li><button class="answerButton3" id="true3">quotes</button></li>
+            <li><button class="answerButton3" id="false3">parantheses</button></li>
         </ol>
     </div>
 
-    <div id="highscores">
+    <div id="scoreInput" style="text-align: center">
         <form id="form">
             <label for="initials">initials</label>
             <input type="text" id="initials" name="initials"><br></br>
             <label for="score">score</label>
             <input type="text" id="score" name="score"><br>
+            <label for="time">time</label>
+            <input type="number" id="time" name="time"><br>
         </form>
+        <button id="save" style="margin: 10px;">Save</button>
+        <br>
         <button id="goback">Go Back</button>
         <button id="clear">CLEAR</button>
     </div>
 
+    <div id="highScoreDisplay" style="text-align: center; margin-top: 50px;">
+        <h1 style="font-size: 20px">High Scores</h1>
+            <p>Initials: </p>
+            <p>Score: </p>
+            <p>Time: </p>
+    </div>
+
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+     <script src="script.js"></script> 
 </body>
 
 
