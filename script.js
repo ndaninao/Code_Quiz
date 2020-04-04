@@ -4,6 +4,7 @@ var ElH1 = document.createElement("h1");
 var Elinfo = document.createElement("div");
 var ElButton = document.createElement("button");
 var ElTimer = document.getElementById("timer");
+var timerCount = document.getElementById("timerCount");
 var ElHighScores = document.getElementById("highscores");
 var score = document.querySelector("score");
 var initials = document.getElementById("initials");
@@ -17,7 +18,6 @@ var timerCounter = 75;
 //var timeLess = nowTime - 15;
 
 header.innerHTML = "View Highscores";
-ElTimer.innerHTML = "Time: " + timerCounter;
 ElH1.textContent = "Coding Quiz Challenge";
 Elinfo.textContent = "Try to answer the following code-related questions within the time limit. Keep in mind that incorrect answers will penalize your score time by ten seconds!";
 ElButton.textContent = "Start Quiz";
@@ -57,66 +57,72 @@ $("#highScoreDisplay").hide();
 
 $(ElHighScores).click(function() {
     $("#highScoreDisplay").show();
-    JSON.parse(localStorage.getItem("finalScore", "initials"));
-
+    var currentHighScore = JSON.parse(localStorage.getItem("score"));
+    console.log(currentHighScore);
+    $("#highInitials").html(currentHighScore.initials);
+    $("#finalHighScore").html(currentHighScore.score);
+    $("#highTime").html(currentHighScore.time);
 });
+//id="highInitials"></span></p>
+           // <p>Score: <span id="finalHighScore"></span></p>
+            //<p>Time: <span id="highTime"
 
 
-//fix score recording aka quizTakerChoice
-//fix clear button at end 
+var startTimeInt;
 
-function quizTakerChoice() {
-    if (userInput1=rightAnswer1) {
-        score1 = 5;
-    }
-
-    else {
-        score1 = 0;
-    };
-
-    if (userInput2=rightAnswer2) {
-        score2 = 5;
-    }
-
-    else {
-        score2 = 0;
-    };
-
-    if (userInput3=rightAnswer3) {
-        score3 = 5;
-    }
-
-    else {
-        score3 = 0;
-    };
-    
+function startTimer() {
+    console.log("starting timer");
+    startTimeInt = setInterval(function () {
+        timerCount.innerHTML = timerCounter;
+        timerCounter--;
+    }, 1000);
 };
 
 
+function endTime() {
+    console.log(endTime);
+    clearInterval(startTimeInt);
+}
+
 
 //function startButton() {
-$(ElButton).click(function() {
+$(ElButton).click(function () {
+    startTimer();
     $("#question1").show();
     $(ElH1).hide();
     $(Elinfo).hide();
     $(ElButton).hide();
     $("#highScoreDisplay").hide();
-    });
+});
 
-$(".answerButton1").click(function() {
+
+$(".answerButton1").click(function () {
     $("#question2").show();
     $("#question1").hide();
     $(ElH1).hide();
     $(Elinfo).hide();
     $(ElButton).hide();
     $("#highScoreDisplay").hide();
+    console.log(this);
+    console.log(rightAnswer1);
+    var quizTakerChoice = this.innerHTML;
+    console.log(quizTakerChoice);
+    if (quizTakerChoice == rightAnswer1.innerHTML) {
+        console.log(rightAnswer1.innerHTML);
+        console.log(quizTakerChoice);
+        score1 = 5;
+    }
+    else {
+        score1 = 0;
+        console.log("false");
+        timerCounter = timerCounter - 15;
+    };
+    console.log(score1);
 });
 
-quizTakerChoice();
-localStorage.setItem("score1", JSON.stringify(score1));
-console.log(score1);
 
-$(".answerButton2").click(function() {
+
+$(".answerButton2").click(function () {
     $("#question3").show();
     $("#question1").hide();
     $("#question2").hide();
@@ -124,48 +130,79 @@ $(".answerButton2").click(function() {
     $(Elinfo).hide();
     $(ElButton).hide();
     $("#highScoreDisplay").hide();
+    console.log(this);
+    console.log(rightAnswer2);
+    var quizTakerChoice2 = this.innerHTML;
+    console.log(quizTakerChoice2);
+    if (quizTakerChoice2 == rightAnswer2.innerHTML) {
+        console.log(rightAnswer2.innerHTML);
+        console.log(quizTakerChoice2);
+        score2 = 5;
+    }
+    else {
+        score2 = 0;
+        console.log("false");
+        timerCounter = timerCounter - 15;
+    };
+    console.log(score2);
 });
 
-quizTakerChoice();
-localStorage.setItem("score2", JSON.stringify(score2));
-console.log(score2);
-var finalScore = score1 + score2 + score3;
 
-$(".answerButton3").click(function() {
-    $("#scoreInput").show();
-    $("#score").val(finalScore);
+
+$(".answerButton3").click(function () {
     $("#question1").hide();
     $("#question2").hide();
     $("#question3").hide();
     $(ElH1).hide();
     $(Elinfo).hide();
-    $(ElButton).hide();  
+    $(ElButton).hide();
     $("#highScoreDisplay").hide();
+    console.log(this);
+    console.log(rightAnswer3);
+    var quizTakerChoice3 = this.innerHTML;
+    console.log(quizTakerChoice3);
+    if (quizTakerChoice3 == rightAnswer3.innerHTML) {
+        console.log(rightAnswer3.innerHTML);
+        console.log(quizTakerChoice3);
+        score3 = 5;
+    }
+    else {
+        score3 = 0;
+        console.log("false");
+        timerCounter = timerCounter - 15;
+    };
+    console.log(score3);
+    endTime();
+    timerCount.innerHTML = timerCounter;
+
+    $("#scoreInput").show();
+    var finalScore = score1 + score2 + score3;
+    $("#score").val(finalScore);
+    console.log(finalScore);
+    $("#time").val(timerCounter);
+    console.log()
 });
 
-quizTakerChoice();
-localStorage.setItem("score3", JSON.stringify(score3));
-
-
-console.log(score3);
-console.log(finalScore);
-console.log(localStorage);
-
-
-$(saveScore).click(function () {
-    localStorage.setItem("finalScore", JSON.stringify(finalScore));
-    localStorage.setItem("initials", JSON.stringify(initials));
+$("#save").click(function () {
+    var userResults = {
+        initials: $("#initials").val(),
+        score: $("#score").val(),
+        time: $("#time").val(),
+    };
+    console.log(userResults);
+    localStorage.setItem("score", JSON.stringify(userResults));
 });
 
-$(clear).click(function() {
-    $(initials).clear();
-    $(score).clear();
+$("#clear").click(function() {
+    $("#initials").val("");
+    $("#score").val("");
+    $("#time").val("");
 });
 
-$(goBack).click(function() {
+$(goBack).click(function () {
     $(ElH1).show();
     $(Elinfo).show();
-    $(ElButton).show(); 
+    $(ElButton).show();
     $("#question1").hide();
     $("#question2").hide();
     $("#question3").hide();
@@ -176,48 +213,44 @@ $(goBack).click(function() {
 
 
 
-    /* if (quizTakerChoice = index[1]) {
-            alert("That choice is Correct!");
-            correctCounter++;
-        }
-        else {
-            "That choice is Incorrect!"
-            timeLess();
-        }; */
-
-
-   /* 
-    if (quizTakerChoice = index[0]) {
+/* if (quizTakerChoice = index[1]) {
         alert("That choice is Correct!");
         correctCounter++;
     }
     else {
         "That choice is Incorrect!"
         timeLess();
-    };
+    }; */
 
 
-    if (quizTakerChoice = index[0]) {
-        alert("That choice is Correct!");
-        correctCounter++;
-    }
-    else {
-        "That choice is Incorrect!"
-        timeLess();
-    };
+/*
+ if (quizTakerChoice = index[0]) {
+     alert("That choice is Correct!");
+     correctCounter++;
+ }
+ else {
+     "That choice is Incorrect!"
+     timeLess();
+ };
 
-    nowTime(); */
+
+ if (quizTakerChoice = index[0]) {
+     alert("That choice is Correct!");
+     correctCounter++;
+ }
+ else {
+     "That choice is Incorrect!"
+     timeLess();
+ };
+
+ nowTime(); */
 
 //};
 
 //startButton();
 
 /*
-function nowTime() {
-    setInterval(function () {
-        timerCounter--;
-    }, 1000);
-};
+
 
 
 
